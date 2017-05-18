@@ -604,7 +604,7 @@ class Zotero(object):
             try:
                 filename = self.item(itemkey)['data']['filename']
             except TypeError:
-                filename = "item.html.zip"
+                filename = "{i}.zip".format(i=itemkey)
         if path:
             pth = os.path.join(path, filename)
         else:
@@ -612,6 +612,7 @@ class Zotero(object):
         to_write = self.file(itemkey)
         with open(pth, 'wb') as f:
             f.write(to_write)
+        return pth
 
     @retrieve
     def children(self, item, **kwargs):
